@@ -3,6 +3,7 @@
   background-color: #e0745b;
   /* height: 40vh; */
   width: 100%;
+  background-blend-mode: multiply;
 }
 .container {
   /* background-color: #e0745b; */
@@ -30,7 +31,7 @@ h2 {
   /* position: absolute; */
   height: 0px;
   border-style: solid;
-  border-width: 10px 0 10px 16px;
+  border-width: 8px 0 8px 12px;
   border-color: transparent transparent transparent white;
   transform: rotate(0deg);
   margin-left: 5px;
@@ -44,7 +45,7 @@ h2 {
   position: relative;
 }
 hr {
-  border-color: blanchedalmond;
+  border-color: rgb(255, 246, 246);
 }
 ul li {
   list-style: none;
@@ -56,6 +57,11 @@ ul li {
   height: 15px;
   width: 15px;
   border-radius: 50%;
+}
+.nav-container {
+  background-color: black;
+  width: 25%;
+  color: white;
 }
 .profile-name {
   font-size: 10px;
@@ -77,6 +83,9 @@ ul li {
   height: 30px;
   width: 30px;
 }
+.navbar-brand {
+  width: 30px;
+}
 /* .cover-info {
   margin-top: auto;
 } */
@@ -85,7 +94,9 @@ ul li {
 }
 .track {
   background-color: rgb(62, 60, 60);
+  transform: translateY(-16px);
 }
-.songs {
-  background-color: blanchedalmond;
+.play-bar {
+  background-color: rgb(240, 139, 102);
+  background-blend-mode: multiply;
 }
