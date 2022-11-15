@@ -4,16 +4,49 @@ body {
   background-color: var(--black);
   font-family: "Signika", sans-serif;
 }
-.album-cover,
+.album-cover {
+  background-image: linear-gradient(coral, rgb(78, 64, 59));
+}
+.cover-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+strong {
+  padding: 5px;
+  font-weight: bold;
+  font-size: 1.4em;
+}
+.posted-by-artist {
+  margin-top: 0.5em;
+  padding-left: 0.5em;
+}
+.total-songs,
+.duration {
+  font-size: 0.8em;
+}
 .next {
+  background-color: coral;
+  /* position: fixed; */
+  z-index: 3;
+  top: 0;
+  right: 0;
+  /* width: 83.2%; */
+}
+.next-icons {
+  margin-left: 500px;
+}
+.album-cover {
   width: 100%;
   background-blend-mode: multiply;
 }
 .container {
   background-image: linear-gradient(
-    #e0745b 10%,
+    coral,
+    #e0745b 0.02%,
     rgb(79, 52, 42) 25%,
-    rgb(32, 30, 30) 40%
+    rgb(32, 30, 30) 40%,
+    rgb(32, 30, 30) 100%
   );
   color: white;
   margin-left: 16.5% !important;
@@ -22,8 +55,8 @@ body {
   width: 100%;
 }
 .image-cover {
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 300px;
 }
 .album-profile-img {
   width: 30px;
@@ -111,7 +144,7 @@ ul li {
   font-size: 0.9em;
 }
 .play-bar {
-  /* background-image: linear-gradient(rgb(109, 63, 46), rgb(106, 79, 71)); */
+  background-image: linear-gradient(rgb(91, 75, 69), rgb(79, 52, 42));
   background-blend-mode: multiply;
 }
 .playing-bottom-bar {

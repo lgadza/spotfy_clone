@@ -22,16 +22,18 @@ async function getAlbum() {
 
 function renderAlbum(album) {
   console.log(album.release_date);
-  //   albumName.innerText = album.name;
-  //   artistNamePosted.innerText = artist.name;
-  //   artistNamePlaylist.innerText = "Best of " + artist.name;
-  //   artistContainer.style.backgroundImage = `url(${artist.picture_xl})`;
-  //   artistCircle.style.backgroundImage = `url(${artist.picture_small})`;
-  //   smallAlbum.src = artist.picture_medium;
+  const durationNatural = Number(album.duration);
+  const duration = Number(album.duration) / 3600;
+  //if (duration >= 1) {
+  const hr = parseInt(duration);
+  const mins = parseInt((durationNatural - hr * 3600) / 60);
+  const seconds = parseInt(durationNatural - hr * 3600 - mins * 60);
+  console.log(seconds);
+
   albumCover.innerHTML = `
     <div class="album-cover-info d-flex justify-content-start mt-3">
             <img
-              src="Zion_(Official_Album_Cover)_by_Hillsong_United.png"
+              src="${album.cover}"
               alt="Tribal"
               class="img-fluid image-cover"
             />
@@ -43,17 +45,47 @@ function renderAlbum(album) {
               >
                 <img src="${album.artist.picture}" alt="" class="album-profile-img" />
                 <span><h6 class="posted-by-artist">${album.artist.name}</h6> </span>
-                <span class="year">. ${album.release_date}.</span>
+                <span class="year "><strong>.</strong> ${album.release_date}<strong>.</strong></span>
 
-                <span class="total-songs">18 songs</span>
-                <span class="duration">, 1 hr 30min</span>
+                <span class="total-songs">${album.nb_tracks} songs</span>
+                <span class="duration"><strong>,</strong> ${hr} hr ${mins} min ${seconds} sec</span>
               </div>
             </div>
           </div>
     `;
 }
+const track = document.querySelector(".track");
+function renderAlbumSongs(album) {
+  console.log(album.tracks.data);
+  console.log(album.tracks.data.length);
+
+  let count = 0;
+  for (let i = 0; i < album.tracks.data.length; i++) {
+    const durationNatural = Number(album.tracks.data[i].duration);
+    console.log(durationNatural);
+
+    const mins = parseInt(durationNatural / 60);
+    const seconds = parseInt(durationNatural - -mins * 60);
+    track.innerHTML += `
+    <div class="d-flex song-bar-options align-items-center py-2 mr-4">
+            <span class="song-number">${i + 1}</span>
+            <div class="d-flex justify-content-between w-100 pr-5">
+              <div class="d-flex flex-column ml-4">
+                <span class="track-name">${album.tracks.data[i].title}</span>
+                <span>${album.tracks.data[1].artist.name}</span>
+              </div>
+              <div>
+                <span>${mins}:${seconds}</span>
+              </div>
+            </div>
+          </div>`;
+    count++;
+  }
+  console.log(count);
+}
 
 window.onload = async () => {
   const album = await getAlbum();
   renderAlbum(album);
+  renderAlbumSongs(album);
 };
