@@ -1,3 +1,9 @@
+body {
+  color: white;
+  /* height: 100%; */
+  background-color: var(--black);
+  font-family: "Signika", sans-serif;
+}
 .album-cover,
 .next {
   width: 100%;
