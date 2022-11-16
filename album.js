@@ -29,6 +29,9 @@ function renderAlbum(album) {
   const mins = parseInt((durationNatural - hr * 3600) / 60);
   const seconds = parseInt(durationNatural - hr * 3600 - mins * 60);
   console.log(seconds);
+  let date = new Date(album.release_date);
+  let year = date.getFullYear();
+  console.log(year);
 
   albumCover.innerHTML = `
     <div class="album-cover-info d-flex justify-content-start mt-3">
@@ -38,14 +41,16 @@ function renderAlbum(album) {
               class="img-fluid image-cover"
             />
             <div class="cover-info ml-4 mt-auto">
-              <span>ALBUM</span>
-              <h2 class="album-name">${album.title}</h2>
+              <span class="album-album1">ALBUM</span>
+              <span class="album-album d-none">Album <strong>.</strong> ${year}</span>
+              <h2 class="hide album-name">${album.title}</h2>
+              <p class="album-name pb-0 mb-0 mt-3 show d-none">${album.title}</p>
               <div
                 class="song-info d-flex justify-content-end align-items-center"
               >
                 <img src="${album.artist.picture}" alt="" class="album-profile-img" />
-                <span><h6 class="posted-by-artist">${album.artist.name}</h6> </span>
-                <span class="year "><strong>.</strong> ${album.release_date}<strong>.</strong></span>
+                <span><h6 class="posted-by-artist artist-name">${album.artist.name}</h6> </span>
+                <span class="year "><strong>.</strong> ${year}<strong>.</strong></span>
 
                 <span class="total-songs">${album.nb_tracks} songs</span>
                 <span class="duration"><strong>,</strong> ${hr} hr ${mins} min ${seconds} sec</span>
@@ -65,7 +70,7 @@ function renderAlbumSongs(album) {
     console.log(durationNatural);
 
     const mins = parseInt(durationNatural / 60);
-    const seconds = parseInt(durationNatural - -mins * 60);
+    const seconds = parseInt(durationNatural - mins * 60);
     track.innerHTML += `
     <div class="d-flex song-bar-options align-items-center py-2 mr-4">
             <span class="song-number">${i + 1}</span>
@@ -89,3 +94,6 @@ window.onload = async () => {
   renderAlbum(album);
   renderAlbumSongs(album);
 };
+// @media screen and (min-width: 480px){
+
+// }

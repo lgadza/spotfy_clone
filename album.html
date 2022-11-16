@@ -14,7 +14,7 @@
     <title>Album</title>
   </head>
   <body>
-    <div class="container-fluid d-flex justify-content-between m-0 p-0">
+    <div class="container-fluid d-flex justify-content-between m-0 p-0 w-">
       <div class="nav-container pl-5 pr-3 p-0 col-2">
         <a href="#"><img src="spotify-logo.png" height="50px" alt="" /></a>
 
@@ -138,9 +138,9 @@
         </nav> -->
         <!-- nav -->
       </div>
-      <div class="container w-80 col-10 m-0 p-0">
+      <div class="container col-10 md-12 m-0 p-0">
         <div
-          class="next d-flex align-items-center justify-content-between py-2 pl-3"
+          class="next col-12 d-flex align-items-center justify-content-between py-2 pl-3"
         >
           <div class="d-flex">
             <div class="next-arrow mr-3">
@@ -171,26 +171,57 @@
             ></span>
           </div>
         </div>
+        <div class="go-back pl-4 pt-3 pb-0 my-0">
+          <iconify-icon icon="ic:baseline-arrow-back" width="30"></iconify-icon>
+        </div>
         <div class="album-cover p-3"></div>
         <div class="play-bar">
           <div class="songs p-3">
             <div class="play d-flex justify-content-start align-items-center">
               <div
-                class="play-container d-flex justify-content-center align-items-center"
+                class="hide play-container d-flex justify-content-center align-items-center"
               >
                 <div class="triangle"></div>
               </div>
               <div class="favourate mx-4">
                 <iconify-icon
                   icon="mdi:cards-heart-outline"
-                  width="20"
-                  height="20"
+                  width="25"
+                  height="25"
                 ></iconify-icon>
               </div>
-              <div class="menu-settings mb-3"><h3>...</h3></div>
+              <div class="download d-none show mr-4">
+                <iconify-icon
+                  icon="grommet-icons:download-option"
+                  width="20"
+                ></iconify-icon>
+              </div>
+              <div class="menu-settings mb-3">
+                <h3 class="hide">...</h3>
+                <span class="d-none show pt-3"
+                  ><iconify-icon
+                    icon="mdi:dots-vertical"
+                    width="25"
+                  ></iconify-icon
+                ></span>
+              </div>
+              <div
+                id="shulffle"
+                class="d-none shulffle mr-auto show d-flex justify-content-end ml-5"
+              >
+                <iconify-icon icon="ph:shuffle" width="25"></iconify-icon>
+              </div>
+              <div class="d-none shulffle mr-3 show d-flex justify-content-end">
+                <!-- <div><i class="bi bi-shuffle"></i></div> -->
+                <div
+                  class="play-container d-flex justify-content-center align-items-center"
+                >
+                  <div class="triangle"></div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="songs-list mb-0 pb-0 mx-3">
+          <div id="title" class="songs-list mb-0 pb-0 mx-3">
             <div
               class="songs-list-bar d-flex justify-content-between pr-4 pl-2 mr-4"
             >
@@ -209,7 +240,7 @@
       </div>
     </div>
     <div
-      class="playing-bottom-bar px-4 d-flex align-items-center justify-content-between"
+      class="playing-bottom-bar hide px-4 d-flex align-items-center justify-content-between"
     >
       <div class="p-4 d-flex align-items-center">
         <img class="playing-cover" src="tribal.jpeg" alt="" />
