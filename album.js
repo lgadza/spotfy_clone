@@ -36,7 +36,7 @@ function renderAlbum(album) {
   albumCover.innerHTML = `
     <div class="album-cover-info d-flex justify-content-start mt-3">
             <img
-              src="${album.cover}"
+              src="${album.cover_big}"
               alt="Tribal"
               class="img-fluid image-cover"
             />
@@ -58,9 +58,15 @@ function renderAlbum(album) {
             </div>
           </div>
     `;
+  let playingCover = document.querySelector(".playing-cover");
+  playingCover.src = `${album.cover_small}`;
+  console.log(playingCover);
 }
 const track = document.querySelector(".track");
 function renderAlbumSongs(album) {
+  // let likeOption = [];
+  // let songNumberOption = [];
+  // let likeSongOption = [];
   console.log(album.tracks.data);
   console.log(album.tracks.data.length);
 
@@ -74,20 +80,47 @@ function renderAlbumSongs(album) {
     track.innerHTML += `
     <div class="d-flex song-bar-options align-items-center py-2 mr-4">
             <span class="song-number">${i + 1}</span>
+            <span class=" like-song d-none triangle"></span>
             <div class="d-flex justify-content-between w-100 pr-5">
-              <div class="d-flex flex-column ml-4">
+              <div class="d-flex flex-column ml-5">
                 <span class="track-name">${album.tracks.data[i].title}</span>
                 <span>${album.tracks.data[1].artist.name}</span>
               </div>
-              <div>
-                <span>${mins}:${seconds}</span>
+              <div class="d-flex align-items-center ml-0 ">
+              <span class="like-song d-none mr-3"><i class="bi bi-heart "></i></span>
+                <span class="song-mins">${mins}:${seconds}</span>
               </div>
+              <span class="three-dots d-none"><i class="bi bi-three-dots-vertical"></i></span>
             </div>
           </div>`;
     count++;
+    let songBar = document.querySelector(".song-bar-options");
+    let songNumber = document.querySelector(".song-number");
+    let likeSong = document.querySelector(".like-song");
+
+    // console.log(songBar);
+    // likeOption.push(songBar);
+    // likeSongOption.push(likeSong);
+    // songNumberOption.push(songNumber);
   }
-  console.log(count);
+
+  let allOptions = [likeOption, likeSongOption, songNumberOption];
+  return allOptions;
+  // likeOption.forEach((songBar) => {
+  //   songBar.addEventListener("mouseover", () => {
+  //     //for (let i = 0; i < album.tracks.data.length; i++) {
+
+  //     songNumberOption.forEach((number) => {
+  //       number.style.display = "none";
+  //     });
+  //     likeSongOption.forEach((song) => {
+  //       song.style.display = "block";
+  //     });
+  //     //}
+  //   });
+  // });
 }
+// console.log(likeOption);
 
 window.onload = async () => {
   const album = await getAlbum();
