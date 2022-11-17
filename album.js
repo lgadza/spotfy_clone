@@ -1,3 +1,7 @@
+const albumId = window.location.search;
+const search = new URLSearchParams(albumId);
+let id = search.get("id");
+
 const albumCover = document.querySelector(".album-cover");
 const artistName = document.querySelector(".posted-by-artist");
 const albumYear = document.querySelector("year");
@@ -13,7 +17,10 @@ async function getAlbum() {
     }
   );
   const album = await response.json();
+
   console.log(album);
+  const track = album.tracks.data;
+  console.log(track);
   return album;
 }
 // } catch (error) {
@@ -65,43 +72,6 @@ function renderAlbum(album) {
 const track = document.querySelector(".track");
 function renderAlbumSongs(album) {
   let likeSongOption = [];
-  // let likeOption = [];
-  // let songNumberOption = [];
-
-  //   for (let i = 0; i < album.tracks.data.length; i++) {
-  //     const durationNatural = Number(album.tracks.data[i].duration);
-
-  //     const mins = parseInt(durationNatural / 60);
-  //     const seconds = parseInt(durationNatural - mins * 60);
-  //     track.innerHTML += `
-  //     <div class="d-flex song-bar-options align-items-center py-2 mr-4">
-  //             <span class="song-number">${i + 1}</span>
-  //             <div class=" like-song d-none triangle"></div>
-  //             <div class="d-flex justify-content-between w-100 pr-5">
-  //               <div class="d-flex flex-column ml-5">
-  //                 <span class="track-name">${album.tracks.data[i].title}</span>
-  //                 <span>${album.tracks.data[1].artist.name}</span>
-  //               </div>
-  //               <div class="d-flex align-items-center ml-0 ">
-  //               <span "  id="like-song" class="like-song soong d-none mr-3"><i class="bi bi-heart "></i></span>
-  //                 <span class="song-mins">${mins}:${seconds}</span>
-  //               </div>
-  //               <span class="three-dots d-none"><i class="bi bi-three-dots-vertical"></i></span>
-  //             </div>
-  //           </div>`;
-
-  //     let songBar = document.querySelector(".song-bar-options");
-  //     let songNumber = document.querySelector(".song-number");
-  //     let likeSong = document.querySelectorAll(".soong");
-  //     // likeSong.addEventListener("click", () => {
-  //     //   likeSong.style.color = "red";
-  //     // });
-  //     // $(document).ready(function myFunction() {
-  //     //   likeSong.style.color = "red";
-  //     likeSongOption.push(likeSong);
-  //     // });
-
-  // }
 
   for (let i = 0; i < album.tracks.data.length; i++) {
     const durationNatural = Number(album.tracks.data[i].duration);
@@ -109,7 +79,7 @@ function renderAlbumSongs(album) {
     const mins = parseInt(durationNatural / 60);
     const seconds = parseInt(durationNatural - mins * 60);
     track.innerHTML += `
-    <div class="d-flex song-bar-options align-items-center py-2 mr-4">
+    <div onclick="displaySongDetail(event)" class="d-flex song-bar-options align-items-center py-2 mr-4">
         <span class="song-number">${i + 1}</span>
         <div onclick="playSong(event)" class=" like-song d-none triangle triangle-play"></div>
         <div class="d-flex justify-content-between w-100 pr-5">
@@ -138,87 +108,6 @@ function renderAlbumSongs(album) {
   }
 }
 
-function renderPlayBar(album) {
-  for (let i = 0; i < album.tracks.data.length; i++) {
-    let playingBottomBar = document.querySelector(".playing-bottom-bar");
-    playingBottomBar.innerHTML = `
-  <div class="p-4 d-flex align-items-center">
-        <img class="playing-cover" src="" alt="" />
-        <div class="playing-song-name p-4">
-          <div class="song-name">${album.tracks.data[i].title}</div>
-          <div class="album-name">Queen</div>
-        </div>
-        <div>
-          <iconify-icon
-            icon="mdi:cards-heart-outline"
-            width="12"
-            height="12"
-          ></iconify-icon>
-        </div>
-      </div>
-      <div>
-        <div
-          class="px-4 d-flex align-items-center mr-5 justify-content-center playing-section"
-        >
-          <div class="px-4 ml-5">
-            <iconify-icon icon="fontisto:random" width="12"></iconify-icon>
-          </div>
-          <div class="px-4">
-            <iconify-icon icon="ri:skip-back-fill" width="12"></iconify-icon>
-          </div>
-          <div class="play-triagle">
-            <div class="triangle2"></div>
-          </div>
-          <div class="px-4">
-            <iconify-icon icon="ri:skip-forward-fill" width="12"></iconify-icon>
-          </div>
-          <div class="px-4">
-            <iconify-icon icon="subway:random" width="12"></iconify-icon>
-          </div>
-        </div>
-        <div
-          class="px-4 d-flex align-items-center justify-content-spacebetween"
-        >
-          <span>0:12</span>
-          <div>
-            <div class="progress progress3 mx-4">
-              <div
-                class="progress-bar w-75"
-                role="progressbar"
-                aria-valuenow="75"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              ></div>
-            </div>
-          </div>
-          <span>3:30</span>
-        </div>
-      </div>
-      <div class="d-flex align-items-center">
-        <div>
-          <iconify-icon icon="fontisto:play-list" width="12"></iconify-icon>
-        </div>
-        <div class="px-4">
-          <iconify-icon icon="mdi:monitor-speaker" width="12"></iconify-icon>
-        </div>
-        <div>
-          <iconify-icon icon="charm:sound-up" width="12"></iconify-icon>
-        </div>
-        <div>
-          <div class="progress progress2 mx-4">
-            <div
-              class="progress-bar w-75"
-              role="progressbar"
-              aria-valuenow="75"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-        </div>
-      </div>
-  `;
-  }
-}
 const makeSongRed = (event) => {
   const likes = document.querySelectorAll(".soong");
   for (let i = 0; i < likes.length; i++) {
@@ -227,6 +116,7 @@ const makeSongRed = (event) => {
     });
   }
 };
+
 const playSong = (event) => {
   const songs = document.querySelectorAll(".triangle-play");
   for (let i = 0; i < songs.length; i++) {
@@ -235,15 +125,122 @@ const playSong = (event) => {
       songs[i].style.display = "block !important";
       console.log(songs[i]);
       // console.log(i + 1);
-      return i;
+      let index = i;
+      // renderPlayBar();
+
+      return index;
     });
   }
 };
+// function renderPlayBar(album) {
+//   // console.log(index);
+//   for (let i = 0; i < album.tracks.data.length; i++) {
+//     const durationNatural = Number(album.tracks.data[i].duration);
+
+//     const mins = parseInt(durationNatural / 60);
+//     const seconds = parseInt(durationNatural - mins * 60);
+//     let playingBottomBar = document.querySelector(".playing-bottom-bar");
+//     playingBottomBar.innerHTML = `
+//   <div onclick="displaySongDetail(event)" class="p-4 d-flex align-items-center display-play">
+//         <img class="playing-cover" src="${album.artist.picture}" alt="" />
+//         <div class="playing-song-name p-4">
+//           <div class="song-name">${album.tracks.data[i].title}</div>
+//           <div class="album-name">Queen</div>
+//         </div>
+//         <div>
+//           <iconify-icon
+//             icon="mdi:cards-heart-outline"
+//             width="12"
+//             height="12"
+//           ></iconify-icon>
+//         </div>
+//       </div>
+//       <div>
+//         <div
+//           class="px-4 d-flex align-items-center mr-5 justify-content-center playing-section"
+//         >
+//           <div class="px-4 ml-5">
+//             <iconify-icon icon="fontisto:random" width="12"></iconify-icon>
+//           </div>
+//           <div class="px-4">
+//             <iconify-icon icon="ri:skip-back-fill" width="12"></iconify-icon>
+//           </div>
+//           <div class="play-triagle">
+//             <div class="triangle2"></div>
+//           </div>
+//           <div class="px-4">
+//             <iconify-icon icon="ri:skip-forward-fill" width="12"></iconify-icon>
+//           </div>
+//           <div class="px-4">
+//             <iconify-icon icon="subway:random" width="12"></iconify-icon>
+//           </div>
+//         </div>
+//         <div
+//           class="px-4 d-flex align-items-center justify-content-spacebetween"
+//         >
+//           <span>0:12</span>
+//           <div>
+//             <div class="progress progress3 mx-4">
+//               <div
+//                 class="progress-bar w-75"
+//                 role="progressbar"
+//                 aria-valuenow="75"
+//                 aria-valuemin="0"
+//                 aria-valuemax="100"
+//               ></div>
+//             </div>
+//           </div>
+//           <span>${mins}:${seconds}</span>
+//         </div>
+//       </div>
+//       <div class="d-flex align-items-center">
+//         <div>
+//           <iconify-icon icon="fontisto:play-list" width="12"></iconify-icon>
+//         </div>
+//         <div class="px-4">
+//           <iconify-icon icon="mdi:monitor-speaker" width="12"></iconify-icon>
+//         </div>
+//         <div>
+//           <iconify-icon icon="charm:sound-up" width="12"></iconify-icon>
+//         </div>
+//         <div>
+//           <div class="progress progress2 mx-4">
+//             <div
+//               class="progress-bar w-75"
+//               role="progressbar"
+//               aria-valuenow="75"
+//               aria-valuemin="0"
+//               aria-valuemax="100"
+//             ></div>
+//           </div>
+//         </div>
+//       </div>
+//   `;
+//   }
+// }
+const displaySongDetail = (event) => {
+  const display = document.querySelectorAll(".display-play");
+  for (let i = 0; i < display.length; i++) {
+    display[i].addEventListener("click", () => {
+      let trackName = document.querySelector(".track-name");
+      console.log(trackName);
+    });
+  }
+  console.log(event);
+  console.log(display[1]);
+};
+
+// window.onload = async () => {
+//   const album = await getAlbum();
+
+//   renderPlayBar(album);
+// };
 
 window.onload = async () => {
   const album = await getAlbum();
   renderAlbum(album);
   renderAlbumSongs(album);
+  // renderPlayBar(album);
+
   // const likeSongOption = renderAlbumSongs();
-  renderPlayBar(album);
 };
