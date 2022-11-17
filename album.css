@@ -241,16 +241,25 @@ a {
     /* margin-left: 0 !important; */
   }
 }
-@media screen and (max-width: 810px) {
-  .nav-container {
-    width: 161.5px;
-    /* height: 90vh; */
-    /* display: none; */
-  }
-  /* .container {
-    width: 100vw;
-    margin-left: 0 !important;
+@media screen and (max-width: 964px) {
+  /* .playing-cover {
+    display: none !important;
   } */
+  .song-name {
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .progress2 {
+    display: none;
+  }
+  .progress3 {
+    width: 200px;
+  }
+  .playing-section {
+    margin-left: -15%;
+  }
 }
 
 @media screen and (max-width: 763px) {
@@ -366,6 +375,7 @@ a {
   .play-container {
     margin-right: 1px;
   }
+
   .three-dots {
     display: block !important;
   }
