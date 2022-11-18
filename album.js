@@ -51,7 +51,7 @@ function renderAlbum(album) {
               <span class="album-album1">ALBUM</span>
               <span class="album-album d-none">Album <strong>.</strong> ${year}</span>
               <h2 class="hide album-name">${album.title}</h2>
-              <p class="album-name pb-0 mb-0 mt-3 show d-none">${album.title}</p>
+              <p class="album-name album-name2 pb-0 mb-0 mt-3 show d-none">${album.title}</p>
               <div
                 class="song-info d-flex justify-content-end align-items-center"
               >
@@ -79,7 +79,7 @@ function renderAlbumSongs(album) {
     const mins = parseInt(durationNatural / 60);
     const seconds = parseInt(durationNatural - mins * 60);
     track.innerHTML += `
-    <div onclick="displaySongDetail(event)" class="d-flex song-bar-options align-items-center py-2 mr-4">
+    <div onclick="displaySongDetail(event)" class="d-flex song-bar-options align-items-center py-2 mr-4 display-play">
         <span class="song-number">${i + 1}</span>
         <div onclick="playSong(event)" class=" like-song d-none triangle triangle-play"></div>
         <div class="d-flex justify-content-between w-100 pr-5">
@@ -132,101 +132,20 @@ const playSong = (event) => {
     });
   }
 };
-// function renderPlayBar(album) {
-//   // console.log(index);
-//   for (let i = 0; i < album.tracks.data.length; i++) {
-//     const durationNatural = Number(album.tracks.data[i].duration);
 
-//     const mins = parseInt(durationNatural / 60);
-//     const seconds = parseInt(durationNatural - mins * 60);
-//     let playingBottomBar = document.querySelector(".playing-bottom-bar");
-//     playingBottomBar.innerHTML = `
-//   <div onclick="displaySongDetail(event)" class="p-4 d-flex align-items-center display-play">
-//         <img class="playing-cover" src="${album.artist.picture}" alt="" />
-//         <div class="playing-song-name p-4">
-//           <div class="song-name">${album.tracks.data[i].title}</div>
-//           <div class="album-name">Queen</div>
-//         </div>
-//         <div>
-//           <iconify-icon
-//             icon="mdi:cards-heart-outline"
-//             width="12"
-//             height="12"
-//           ></iconify-icon>
-//         </div>
-//       </div>
-//       <div>
-//         <div
-//           class="px-4 d-flex align-items-center mr-5 justify-content-center playing-section"
-//         >
-//           <div class="px-4 ml-5">
-//             <iconify-icon icon="fontisto:random" width="12"></iconify-icon>
-//           </div>
-//           <div class="px-4">
-//             <iconify-icon icon="ri:skip-back-fill" width="12"></iconify-icon>
-//           </div>
-//           <div class="play-triagle">
-//             <div class="triangle2"></div>
-//           </div>
-//           <div class="px-4">
-//             <iconify-icon icon="ri:skip-forward-fill" width="12"></iconify-icon>
-//           </div>
-//           <div class="px-4">
-//             <iconify-icon icon="subway:random" width="12"></iconify-icon>
-//           </div>
-//         </div>
-//         <div
-//           class="px-4 d-flex align-items-center justify-content-spacebetween"
-//         >
-//           <span>0:12</span>
-//           <div>
-//             <div class="progress progress3 mx-4">
-//               <div
-//                 class="progress-bar w-75"
-//                 role="progressbar"
-//                 aria-valuenow="75"
-//                 aria-valuemin="0"
-//                 aria-valuemax="100"
-//               ></div>
-//             </div>
-//           </div>
-//           <span>${mins}:${seconds}</span>
-//         </div>
-//       </div>
-//       <div class="d-flex align-items-center">
-//         <div>
-//           <iconify-icon icon="fontisto:play-list" width="12"></iconify-icon>
-//         </div>
-//         <div class="px-4">
-//           <iconify-icon icon="mdi:monitor-speaker" width="12"></iconify-icon>
-//         </div>
-//         <div>
-//           <iconify-icon icon="charm:sound-up" width="12"></iconify-icon>
-//         </div>
-//         <div>
-//           <div class="progress progress2 mx-4">
-//             <div
-//               class="progress-bar w-75"
-//               role="progressbar"
-//               aria-valuenow="75"
-//               aria-valuemin="0"
-//               aria-valuemax="100"
-//             ></div>
-//           </div>
-//         </div>
-//       </div>
-//   `;
-//   }
-// }
 const displaySongDetail = (event) => {
   const display = document.querySelectorAll(".display-play");
   for (let i = 0; i < display.length; i++) {
     display[i].addEventListener("click", () => {
-      let trackName = document.querySelector(".track-name");
+      let trackName = document.querySelectorAll(".track-name").innerHTML;
       console.log(trackName);
+      function renderPlayBar(album) {
+        console.log(album.release_date);
+      }
+      renderPlayBar(album);
     });
   }
-  console.log(event);
+  // console.log(trackName);
   console.log(display[1]);
 };
 
